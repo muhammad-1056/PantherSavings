@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PantherSavings Hub | Student Financial Support</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* --- CSS STYLING --- */
+        :root {
+            --primary: #0033A0; /* Panther Blue */
+            --secondary: #0055D4;
+            --accent: #FFCC00; /* Gold Accent */
+            --light: #f4f7f6;
+            --dark: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--primary);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,51,160,0.9), rgba(0,51,160,0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            color: var(--white);
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 30px; }
+        .btn {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #e6b800; }
+
+        /* Sections General */
+        section {
+            padding: 60px 10%;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        /* Grid Layouts */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+        }
+
+        .card h3 { margin-bottom: 10px; color: var(--primary); }
+        .card i { color: var(--secondary); margin-right: 10px; }
+
+        /* Budget Calculator */
+        .budget-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result-display {
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--light);
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* Marketplace */
+        .market-item {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .market-img {
+            height: 150px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+        }
+        .market-info { padding: 15px; }
+        .price { color: green; font-weight: bold; float: right; }
+
+        /* Help Form */
+        .help-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        textarea { width: 100%; padding: 10px; height: 100px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc;}
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive Mobile Nav */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; } 
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <i class="fas fa-paw"></i> PantherSavings Hub
+        </div>
+        <div class="nav-links">
+            <a href="#food">Food</a>
+            <a href="#emergency">Emergency Help</a>
+            <a href="#budget">Budget Tool</a>
+            <a href="#jobs">Jobs</a>
+            <a href="#market">Marketplace</a>
+            <a href="#help" class="btn" style="color:var(--primary); padding: 5px 15px;">Get Help</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Navigate College Without Financial Stress</h1>
+        <p>A centralized resource for GSU students to find free food, financial aid, jobs, and peer support. You are not alone.</p>
+        <a href="#resources" class="btn">Explore Resources</a>
+    </header>
+
+    <section id="food">
+        <h2 class="section-title"><i class="fas fa-utensils"></i> Free Food Locator</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Campus Pantry</h3>
+                <p><strong>Status:</strong> <span style="color:green">OPEN</span></p>
+                <p>Located at Student Center East, Room 302. Fresh produce and canned goods available.</p>
+                <small>Mon-Fri: 10am - 4pm</small>
+            </div>
+            <div class="card">
+                <h3>Today's Pop-up: Free Pizza</h3>
+                <p><strong>Time:</strong> 12:30 PM Today</p>
+                <p>Hosted by Housing Dept at the Courtyard. First come, first served.</p>
+            </div>
+            <div class="card">
+                <h3>Budget Cooking Workshop</h3>
+                <p>Learn to meal prep for under $5/day. Includes free grocery bag.</p>
+                <small>Next Tuesday @ Dining Hall</small>
+            </div>
+        </div>
+    </section>
+
+    <section id="emergency" style="background-color: #fff;">
+        <h2 class="section-title"><i class="fas fa-hand-holding-heart"></i> Emergency Financial Resources</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3><i class="fas fa-laptop"></i> Tech Loaner Program</h3>
+                <p>Need a laptop or calculator? Request a semester-long loan from the library tech desk.</p>
+                <button onclick="alert('Redirecting to Library Request Form...')" class="btn" style="margin-top:10px; font-size:0.8rem;">Request Item</button>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-bus"></i> Transit Assistance</h3>
+                <p>Apply for reduced-cost MARTA cards or check the free Panther Express shuttle schedule.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-home"></i> Housing Hardship Fund</h3>
+                <p>Emergency grants for students at risk of homelessness or unable to pay rent.</p>
+                <button onclick="alert('Redirecting to Dean of Students Application...')" class="btn" style="margin-top:10px; font-size:0.8rem;">Apply for Grant</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="budget">
+        <h2 class="section-title"><i class="fas fa-calculator"></i> Student Budget Calculator</h2>
+        <div class="budget-box">
+            <p style="margin-bottom:20px; text-align:center;">See how much you really have left to spend.</p>
+            
+            <div class="input-group">
+                <label>Monthly Income (Job, Aid, Family)</label>
+                <input type="number" id="income" placeholder="e.g. 1200">
+            </div>
+            
+            <div class="input-group">
+                <label>Rent & Utilities</label>
+                <input type="number" id="rent" placeholder="e.g. 600">
+            </div>
+
+            <div class="input-group">
+                <label>Groceries & Food</label>
+                <input type="number" id="groceries" placeholder="e.g. 200">
+            </div>
+
+            <div class="input-group">
+                <label>Transport & Other</label>
+                <input type="number" id="other" placeholder="e.g. 100">
+            </div>
+
+            <button onclick="calculateBudget()" class="btn" style="width:100%">Calculate Remaining</button>
+            
+            <div class="result-display" id="result">
+                $0.00
+            </div>
+            <p id="advice" style="text-align: center; margin-top: 10px; font-style: italic;"></p>
+        </div>
+    </section>
+
+    <section id="jobs" style="background-color: #fff;">
+        <h2 class="section-title"><i class="fas fa-briefcase"></i> Quick Job Finder</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Library Assistant (Work Study)</h3>
+                <p><strong>Pay:</strong> $12/hr</p>
+                <p>Flexible hours. Great for getting homework done during downtime.</p>
+            </div>
+            <div class="card">
+                <h3>Dining Hall Cashier</h3>
+                <p><strong>Pay:</strong> $14/hr + Free Meal</p>
+                <p>Immediate start available. No experience needed.</p>
+            </div>
+            <div class="card">
+                <h3>Resident Assistant (RA)</h3>
+                <p><strong>Benefit:</strong> Free Housing + Stipend</p>
+                <p>Applications open for next semester.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="market">
+        <h2 class="section-title"><i class="fas fa-exchange-alt"></i> Student Marketplace</h2>
+        <p style="text-align: center; margin-bottom: 20px;">Trade, swap, or buy items for cheap. No textbook markup here.</p>
+        <div class="grid-container">
+            <div class="market-item">
+                <div class="market-img"><i class="fas fa-book fa-3x"></i></div>
+                <div class="market-info">
+                    <h4>Intro to Psychology Textbook</h4>
+                    <p>Good condition.</p>
+                    <span class="price">FREE</span>
+                </div>
+            </div>
+            <div class="market-item">
+                <div class="market-img"><i class="fas fa-calculator fa-3x"></i></div>
+                <div class="market-info">
+                    <h4>TI-84 Calculator</h4>
+                    <p>Required for Calculus.</p>
+                    <span class="price">$20</span>
+                </div>
+            </div>
+            <div class="market-item">
+                <div class="market-img"><i class="fas fa-cube fa-3x"></i></div>
+                <div class="market-info">
+                    <h4>Mini Fridge</h4>
+                    <p>Perfect for dorms. Pickup at Commons.</p>
+                    <span class="price">$30</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="help" style="background-color: var(--primary); color: white;">
+        <h2 class="section-title" style="color:white"><i class="fas fa-user-secret"></i> Anonymous Request</h2>
+        <p style="text-align: center; margin-bottom: 20px;">Struggling? Let us know what you need. We connect you to resources privately.</p>
+        
+        <form class="help-form" onsubmit="submitHelp(event)">
+            <div class="input-group">
+                <label style="color:var(--dark)">What do you need help with?</label>
+                <select style="width:100%; padding: 10px; margin-bottom:15px;">
+                    <option>Food Insecurity</option>
+                    <option>Housing Issue</option>
+                    <option>Toiletries/Hygiene</option>
+                    <option>School Supplies</option>
+                    <option>Just need advice</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label style="color:var(--dark)">Details (Optional)</label>
+                <textarea placeholder="Tell us a bit more so we can find the right resource..."></textarea>
+            </div>
+            <button type="submit" class="btn" style="width:100%;">Submit Request</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 PantherSavings Hub. Created for Panther LEAP.</p>
+        <p>This is a student project designed to alleviate financial hardship.</p>
+    </footer>
+
+    <script>
+        // 1. Budget Calculator Logic
+        function calculateBudget() {
+            // Get values
+            let income = parseFloat(document.getElementById('income').value) || 0;
+            let rent = parseFloat(document.getElementById('rent').value) || 0;
+            let food = parseFloat(document.getElementById('groceries').value) || 0;
+            let other = parseFloat(document.getElementById('other').value) || 0;
+
+            // Calculate
+            let totalExpenses = rent + food + other;
+            let remaining = income - totalExpenses;
+
+            // Display Result
+            let resultDiv = document.getElementById('result');
+            let adviceDiv = document.getElementById('advice');
+            
+            resultDiv.innerText = "$" + remaining.toFixed(2);
+
+            if (remaining < 0) {
+                resultDiv.style.color = "red";
+                adviceDiv.innerText = "Warning: You are over budget. Check the 'Emergency Help' section for grants.";
+            } else if (remaining < 100) {
+                resultDiv.style.color = "orange";
+                adviceDiv.innerText = "Tight budget! Check the 'Free Food' section to save cash.";
+            } else {
+                resultDiv.style.color = "green";
+                adviceDiv.innerText = "Good job! You are within your means.";
+            }
+        }
+
+        // 2. Help Form Simulation
+        function submitHelp(event) {
+            event.preventDefault(); // Stops page from refreshing
+            alert("Request Received. \n\nWe have directed your request to the Student Care team. An email has been sent to the generic admin account. You are not alone!");
+            // In a real app, this would send data to a backend server.
+        }
+
+        // 3. Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
